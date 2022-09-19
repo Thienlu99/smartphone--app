@@ -1,12 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Box from '@mui/material/Box';
 import Header from './components/Header';
 import Nav from './components/Nav';
-import Banner from './components/Banner';
 import Breadcrumb from './components/Breadcrumb';
 import Imgbackground from './components/bg';
+import ProductList from './components/ProductList';
+import Footer from './components/Footer';
 function App() {
   return (
   <>
@@ -15,6 +14,10 @@ function App() {
     <Breadcrumb />
     <Imgbackground />
     {/* <Banner /> */}
+    <ProductList />
+    <ProductList />
+     <ProductList />
+     <Footer />
     </>
   );
 }

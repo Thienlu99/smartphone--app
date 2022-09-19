@@ -1,11 +1,9 @@
 import {
   Grid,
   IconButton,
-  Input,
   InputBase,
   Paper,
-  Stack,
-  Typography,
+  
 } from "@mui/material";
 import React from "react";
 import "./Header.scss";
@@ -38,7 +36,7 @@ function Header(props) {
                       "aria-label": "Nhập tên điện thoại ... cần tìm",
                     }}
                   />
-                  <IconButton type="button" aria-label="search">
+                  <IconButton type="button" aria-label="search" >
                     <SearchIcon fontSize="medium" />
                   </IconButton>
                 </Paper>
@@ -46,20 +44,20 @@ function Header(props) {
               <Col md={5} sm={12} xs={12}>
                 <ul className="header-ul">
                   <li>
-                    <a href="">
+                    <a href="" className="header-link">
                       <LocalShippingOutlinedIcon color="" fontSize="large" />{" "}
-                      <p>Kiểm tra hàng</p>
+                      <p>Kiểm tra đơn hàng</p>
                     </a>
                   </li>
                   
                   <li>
-                    <a href="">
+                    <a href="" className="header-link">
                       <AccountCircleOutlinedIcon color="" fontSize="large" />{" "}
                      <p> Tài khoản của tôi</p>
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a href="" className="header-link">
                       <ShoppingCartOutlinedIcon color="" fontSize="large" />
                       <p>Giỏ hàng</p>
                     </a>

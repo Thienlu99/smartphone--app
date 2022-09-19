@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import "./Nav.scss";
@@ -9,7 +8,6 @@ import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
 import HeadphonesOutlinedIcon from "@mui/icons-material/HeadphonesOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 
-Nav.propTypes = {};
 
 function Nav(props) {
   return (
@@ -18,9 +16,9 @@ function Nav(props) {
         <Row>
           <Col md={12}>
             <ul className="nav-ul">
-            <li>
+            {/* <li>
             <a className="navbar-brand nav-link" href="#">Trang chủ</a>
-            </li>
+            </li> */}
   {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button> */}

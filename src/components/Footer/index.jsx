@@ -33,17 +33,17 @@ function Footer(props) {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <div className="content-footer-ask">
-              <p variant="" gutterBottom>
+              <p variant="" >
                 Tư vấn mua hàng (Miễn phí)
               </p>
               <a href="">1800 6601</a>
               <span>(Nhánh 1)</span>
-              <p variant="h4" gutterBottom>
+              <p variant="h4" >
                 Hỗ trợ kỹ thuật Góp ý, khiếu nại dịch vụ (8h00-22h00)
               </p>
               <a href="">1800 6601</a>
               <span>(Nhánh 2)</span>
-              <p variant="h4" gutterBottom>
+              <p variant="h4" >
                 Góp ý, khiếu nại dịch vụ (8h00-22h00)
               </p>
               <a href="">1800 6616</a>
@@ -51,7 +51,7 @@ function Footer(props) {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <div className="content-footer-pay">
-              <p variant="h4" gutterBottom>
+              <p variant="h4" >
                 Hỗ trợ thanh toán:
               </p>
               <a title="" style={{ cursor: "none" }}>
@@ -61,7 +61,7 @@ function Footer(props) {
                 <FaCcPaypal fontSize="50" />
               </a>
             
-             <p variant="h4" gutterBottom> Chứng nhận:</p>
+             <p variant="h4" > Chứng nhận:</p>
             <a href="" style={{ cursor: "none" }}>
               <WorkspacePremiumIcon fontSize="large" />
             </a>

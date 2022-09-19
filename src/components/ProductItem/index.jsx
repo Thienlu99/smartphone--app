@@ -24,7 +24,7 @@ function ProductItem() {
             <Typography className='price' variant="body2" color="text.secondary">
             7.490.000đ
             </Typography>
-            <div class="strike-price"><strike>2.990.000 ₫</strike></div>
+            <div className="strike-price"><strike>2.990.000 ₫</strike></div>
           </CardContent>
         </CardActionArea>
         <CardActions>

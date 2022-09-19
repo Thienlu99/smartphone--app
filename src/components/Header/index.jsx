@@ -1,4 +1,5 @@
 import {
+  Button,
   Grid,
   IconButton,
   InputBase,
@@ -13,8 +14,15 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import Login from "../../pages/Login";
 
 function Header(props) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  }
+  // const handleClose = () => setOpen(false);
+  
   return (
     <div className="container-fluid header">
       <div className="container">
@@ -51,11 +59,15 @@ function Header(props) {
                   </li>
                   
                   <li>
-                    <a href="" className="header-link">
+                    {/* <a href="#" className="header-link" onClick={()=> handleOpen()}>
                       <AccountCircleOutlinedIcon color="" fontSize="large" />{" "}
                      <p> Tài khoản của tôi</p>
-                    </a>
+                    </a> */}
+                    <p><AccountCircleOutlinedIcon color="" fontSize="large" />{" "}</p>
+                    <Button variant="text" onClick={()=> handleOpen()}>Tài khoản của tôi</Button>
+                    
                   </li>
+                  {open && <Login handleClose={setOpen}/>}
                   <li>
                     <a href="" className="header-link">
                       <ShoppingCartOutlinedIcon color="" fontSize="large" />

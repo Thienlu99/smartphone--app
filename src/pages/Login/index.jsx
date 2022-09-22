@@ -1,6 +1,8 @@
-import { Avatar, Box, Button, Checkbox, Container, CssBaseline, Grid, Link, Modal, TextField, Typography, FormControlLabel } from "@mui/material";
+import { Avatar, Box, Button, Checkbox, Container, CssBaseline, Grid, Modal, TextField, Typography, FormControlLabel } from "@mui/material";
 import React from "react";
 import "./Login.scss";
+import { useForm } from "react-hook-form";
+import {Link} from "react-router-dom";
 // import {LockOutlinedIcon,Copyright} from '@mui/icons-material/LockOutlined';
 function Login({handleClose}) {
     const style = {
@@ -14,16 +16,31 @@ function Login({handleClose}) {
         boxShadow: 24,
         p: 4,
       };
+      //useForm
+    const {register, handleSubmit, formState: { errors }} = useForm();
+    let arrays = JSON.parse(localStorage.getItem('user')) || [];
+    //trả data là object ={}
+    const onSubmit = (data) => {
+      console.log(data);
+      // e.preventdefault()
+      console.log(data.account);
+      console.log(data.password);
+      // const containsAdmin = userPrivileges.some( element => element === 'admin');
+      // if(data.account === accounts["account"] && data.password === accounts["password"]){
+      //   console.log('Login successful')
+      // } else {
+      //     console.log('Wrong credentials')
+      // }
+    }
   return (
-    <div>
-      <Modal
-        open
-        onClose={()=>handleClose(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-        <Container component="main" maxWidth="xs">
+    <div className="container-fluid login">
+    <div className="container">
+    
+    <section className="">
+    
+        <div className="container style-container">
+        <div className="card text-black">
+        <Container  component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -39,57 +56,72 @@ function Login({handleClose}) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form"  noValidate sx={{ mt: 1 }}>
+          {/* component="form" */}
+          <form  onSubmit={handleSubmit(onSubmit)}>
+          <Box  noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
-              required
+              // required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
+              id="account"
+              label="Account"
+              name="account"
+              // autoComplete="account"
+              // autoFocus
+              {...register("account",
+              {required:true})}
             />
+            {errors.account?.type === "required" && <p className="p-error">Mời bạn nhập Tài khoản</p>}
             <TextField
               margin="normal"
-              required
+              // required
               fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              // autoComplete="current-password"
+              {...register("password",{
+                required:true
+              })}
             />
+            {errors.password?.type === "required" && <p className="p-error">Mời bạn nhập mật khẩu</p>}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <Button 
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              // onclick={(e) =>{onSubmit(e)}}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <a variant="body2">
                   Forgot password?
-                </Link>
+                </a>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
+          </form>
         </Box>
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
-        </Box>
-      </Modal>
+      
+      </div>
+    </div>
+    
+    </section>
+    </div>
     </div>
   );
 }

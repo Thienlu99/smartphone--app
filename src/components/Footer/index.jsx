@@ -4,6 +4,7 @@ import "./Footer.scss";
 import { FaCcPaypal, FaCcVisa } from "react-icons/fa";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import ApprovalIcon from "@mui/icons-material/Approval";
+import { Link } from "react-router-dom";
 
 function Footer(props) {
   return (
@@ -14,19 +15,19 @@ function Footer(props) {
             <div className="content-footer-ul">
               <ul>
                 <li>
-                  <a href="">Giới thiệu về công ty</a>
+                  <a href="https://frt.vn/" target="_blank">Giới thiệu về công ty</a>
                 </li>
                 <li>
-                  <a href="">Câu hỏi thường gặp mua hàng</a>
+                  <Link to="/question">Câu hỏi thường gặp mua hàng</Link>
                 </li>
                 <li>
-                  <a href="">Chính sách bảo mật</a>
+                  <Link to="/aboutSecurity">Chính sách bảo mật</Link>
                 </li>
                 <li>
-                  <a href="">Tra cứu thông tin bảo hành</a>
+                  <a href="#">Tra cứu thông tin bảo hành</a>
                 </li>
                 <li>
-                  <a href="">Tin tuyển dụng</a>
+                  <a href="https://vn.indeed.com/jobs?q=C%E1%BB%ADa+H%C3%A0ng+%C4%90i%E1%BB%87n+Tho%E1%BA%A1i+Di+%C4%90%E1%BB%99ng&redirected=1&vjk=10f06e4e7772e206" target="_blank">Tin tuyển dụng</a>
                 </li>
               </ul>
             </div>

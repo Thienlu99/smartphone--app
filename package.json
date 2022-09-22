@@ -16,13 +16,15 @@
     "json-server": "^0.17.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.35.0",
-    "react-hot-toast": "^2.4.0",
     "react-icons": "^4.4.0",
-    "react-router-dom": "5.3.0",
+    "react-router-dom": "6.3.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.8",
     "sass": "^1.54.9",
+    "use-history": "^1.4.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -5,11 +5,11 @@ import ProductItem from "../ProductItem";
 import "./ProductList.scss";
 function ProductList(props) {
   return (
-    <div className="container-fluid profuid">
+    <div  className="container-fluid profuid">
     <Container className="title-list">
     <h2>KHUYẾN MÃI HOT</h2>
-    <Box container sx={{ flexGrow: 1 }}>
-      <Grid container spacing={5}>
+    <Box  sx={{ flexGrow: 1 }}>
+      <Grid container  spacing={5}>
         <Grid item sm={6} md={3}>
           <ProductItem />
         </Grid>

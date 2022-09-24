@@ -30,7 +30,7 @@ function App() {
     </Routes>
     </main>
     <Footer />
-    <Testt />
+    {/* <Testt /> */}
      </BrowserRouter>
     </>
   );

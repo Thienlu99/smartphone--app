@@ -10,16 +10,13 @@ function ProductList(props) {
     <h2>KHUYẾN MÃI HOT</h2>
     <Box  sx={{ flexGrow: 1 }}>
       <Grid container  spacing={5}>
-        <Grid item sm={6} md={3}>
+        <Grid item sm={6} md={4}>
           <ProductItem />
         </Grid>
-        <Grid item sm={6} md={3}>
+        <Grid item sm={6} md={4}>
           <ProductItem />
         </Grid>
-        <Grid item sm={6} md={3}>
-          <ProductItem />
-        </Grid>
-        <Grid item sm={6} md={3}>
+        <Grid item sm={6} md={4}>
           <ProductItem />
         </Grid>
       </Grid>

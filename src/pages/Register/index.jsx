@@ -26,7 +26,6 @@ function Register(props) {
     handleSubmit,
     formState: { errors },
     getValues,
-    watch,
   } = useForm();
 
   //[] array user
@@ -37,25 +36,38 @@ function Register(props) {
   // }
   let accounts = JSON.parse(localStorage.getItem('user')) || [];
   //trả data là object ={}
+       //thêm toast
   const onSubmit = (data) => {
-    
+      const checkRegister = accounts.some((element) => element["account"] === data.account)
+      if(checkRegister){
+        toast.error('Tài khoản tồn tại,đăng ký không thành công!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+          return;
+      }else{
+        toast.success('Thêm tài khoản thành công!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          })
+          accounts.push(data);
+          localStorage.setItem("user",JSON.stringify(accounts));
+      }
     return new Promise(resolve => {
-      //thêm toast
-    toast.success('🦄Thêm thành công!', {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      })
       setTimeout(() =>{
-  // if(accounts.indexOf(accounts.account) === -1){
-    console.log(data);
-    console.log(accounts);
-    accounts.push(data);
-    localStorage.setItem("user",JSON.stringify(accounts));
+    // console.log(data);
+    // console.log(accounts);
+   
       history("/login");
         resolve(true);
   // }else alert("trùng tài khoản")

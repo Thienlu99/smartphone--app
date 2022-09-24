@@ -1,12 +1,11 @@
 import {
-  Button,
-  Grid,
   IconButton,
   InputBase,
   Paper,
+  Typography,
   
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import "./Header.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,7 +13,6 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-import Login from "../../pages/Login";
 import {
   Link
 } from "react-router-dom";
@@ -33,7 +31,7 @@ function Header(props) {
           <Col md={12} sm={12} xs={12}>
             <Row>
               <Col md={2} sm={6} xs={12} >
-              <Link to="/"><img  src="https://img.freepik.com/premium-vector/smart-phone-logo-design-template_18099-3279.jpg?w=2000" alt="" /></Link>
+              <Link to="/" className="text-link"><Typography className="logo" variant="h6">TPSmartPhone</Typography></Link>
                 {/* <Typography sx={{paddingTop:3}}>Logo</Typography> */}
               </Col>
               <Col md={5} sm={6} xs={12}>

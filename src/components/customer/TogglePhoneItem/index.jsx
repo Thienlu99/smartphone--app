@@ -18,7 +18,7 @@ function TogglePhoneItem(props) {
   //componentDidMount
   const { data: dataProductItem, isLoading, isError } =
     // = useFetch('https://api.covid19api.com/country/vietnam?from=2021-10-01T00:00:00Z&to=2021-10-20T00:00:00Z')
-    useFetch("http://localhost:3006/productitem/");
+    useFetch("http://localhost:3006/phoneItem/");
   // console.log(params.producer);
   // const sortList = ["samsung" a
   // sortList.each(item)
@@ -27,7 +27,7 @@ function TogglePhoneItem(props) {
   // link = sortList .tostring()
   return (
     <Container className="title-list">
-      <Box sx={{ paddingBottom: 4 }}>
+      {/* <Box sx={{ paddingBottom: 4 }}>
         <FormControl sx={{ width: 120 }}>
           <InputLabel id="demo-simple-select-label">Chosse</InputLabel>
           <Select
@@ -42,7 +42,7 @@ function TogglePhoneItem(props) {
             <MenuItem value={30}>Giá cao</MenuItem>
           </Select>
         </FormControl>
-      </Box>
+      </Box> */}
       <Box>
         <Grid container spacing={3}>
           {isError === false &&

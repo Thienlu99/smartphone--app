@@ -1,12 +1,11 @@
 import React from "react";
 import {Button,Card,CardActionArea,CardActions,CardContent,CardMedia,Typography,} from "@mui/material";
 import "./ProductItem.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Fade from 'react-reveal/Fade';
 function ProductItem(props) {
-  let  params = useParams();
   const { id,img, name, priceNew, priceOld } = props;
-  console.log(id);
+  // console.log(id);
 
   //submit 
   const history = useNavigate();
@@ -14,14 +13,14 @@ function ProductItem(props) {
     
     history(`/phone/${id}`);
   }
-  // const {data: dataProductItem,isLoading,isError,} = useFetch(`http://localhost:3006/productitem/`);
+  // const {data: dataProductItem,isLoading,isError,} = useFetch(`http://localhost:3006/phoneItem/`);
   return (
     <>
     <Fade bottom>
-      <Card  className="titleitem" sx={{ maxWidth: 345 }}>
+      <Card  className="titleitem align-self-stretch" sx={{ maxWidth: 345, height:460 }}>
         <CardActionArea>
         <Link to={`/phone/${id}`}>
-        {console.log(params.id)}
+        {/* {console.log(params.id)} */}
           <CardMedia
             className="imgmedia"
             component="img"
@@ -31,27 +30,26 @@ function ProductItem(props) {
             alt="green iguana"
           />
           </Link>
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
-              <a href="" className="name-product">
+          <CardContent className=" align-self-stretch">
+            <Typography className="name-product" gutterBottom variant="h6" component="div">    
                 {name}
-              </a>
             </Typography>
+            <div className="strike-price">
+              <strike>{priceOld.toLocaleString()} VNĐ</strike>
+            </div>
             <Typography
               className="price"
               variant="body2"
               color="text.secondary"
             >
-              {priceNew.toLocaleString()} đ
+              {priceNew.toLocaleString()} VNĐ
             </Typography>
-            <div className="strike-price">
-              <strike>{priceOld.toLocaleString()} đ</strike>
-            </div>
+           
           </CardContent>
         </CardActionArea>
         <CardActions>
           <Button variant="contained" color="success" onClick={() => onSubmit()}>
-            Mua ngay 
+            Xem chi tiết 
           </Button>
         </CardActions>
       </Card>

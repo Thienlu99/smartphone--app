@@ -1,50 +1,55 @@
 import {
-  Box,
-  Button,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Container } from "@mui/system";
-import React, { useContext, useState } from "react";
-import ThemeContext from "../../../components/customer/Context/ThemeContext";
-import AddIcon from "@mui/icons-material/Add";
-import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
-import { ToastContainer, toast } from "react-toastify";
-import "./Cart.scss";
-import { useNavigate } from "react-router-dom";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+    Box,
+    Button,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    InputLabel,
+    MenuItem,
+    Radio,
+    RadioGroup,
+    Select,
+    TextField,
+    Typography,
+  } from "@mui/material";
+  import { Container } from "@mui/system";
+  import React, { useContext, useState } from "react";
+  import AddIcon from '@mui/icons-material/Add';
+  import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+  import { ToastContainer, toast } from "react-toastify";
+  import { useNavigate } from "react-router-dom";
+  import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ThemeContext from "../../../../components/customer/Context/ThemeContext";
+import "./ModalBuy.scss";
 import { useForm } from "react-hook-form";
-function Cart(props) {
-  const { myCart, setMycart, setTotalCart, countCart, setCountCart } =
-    useContext(ThemeContext);
-  //history
-  const history = useNavigate();
-  // select color
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-  } = useForm();
-  const [colorItem, setColorItem] = useState("");
-  // total price
-  let totalPrice = 0;
-  // const handleChange = (event) => {
-  //   setColorItem(event.target.value);
-  // };
+
+
+function ModalBuy(props) {
+    const { myModalBuy, setMyModalBuy,  totalModal,setTotalModal } = useContext(ThemeContext);
+   //history
+   const [countItem,setCountItem] = useState(1);
+   const history = useNavigate();
+// select color
+const [colorItem, setColorItem] = useState('');
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+  getValues,
+} = useForm();
+// total price
+let totalPrice = 0;
+const handleChange = (event) => {
+  setColorItem(event.target.value);
+};
   //delete item cart
   // console.log(myCart)
   const handleDeleteItem = (id) => {
-    let data = myCart;
+    let data = myModalBuy;
     data = data.filter((item) => item.id !== id);
-    setMycart(data);
-    setCountCart(() => Number(countCart - 1));
-    toast.error("Đã xóa 1 sản phẩm trong giỏ!", {
+    setMyModalBuy(data);
+    // setCountCart(() => Number(countCart - 1));
+    toast.error('Đã xóa sản phẩm trong giỏ!', {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -53,36 +58,42 @@ function Cart(props) {
       draggable: true,
       progress: undefined,
       theme: "dark",
+      });
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        history("/");
+        resolve(true);
+      }, 3000);
     });
   };
 
-  const handleEditQuatity = (id, price, action) => {
-    const currentindex = myCart.findIndex((item) => {
-      return item.id === id;
-    });
+const handleEditQuatity = (id,price,action) =>{
+  const currentindex = myModalBuy.findIndex((item)=>{return item.id === id})
 
-    if (action === "add") {
-      myCart[currentindex].quantity++;
-      myCart[currentindex].priceNew += price;
-      // console.log(myCart[currentindex].quantity)
-      setMycart([...myCart]);
-    } else if (action === "sub") {
-      if (myCart[currentindex].quantity > 1) {
-        myCart[currentindex].quantity--;
-        myCart[currentindex].priceNew -= price;
-      } else {
-        myCart[currentindex].quantity = 1;
-        myCart[currentindex].priceNew = price;
-      }
-      setMycart([...myCart]);
-    }
-  };
+  if(action === "add"){
+    myModalBuy[currentindex].quantity++;
+    myModalBuy[currentindex].priceNew  += price ;
+    // console.log(myCart[currentindex].quantity)
+    setMyModalBuy([...myModalBuy]);
+  }else if(action === "sub"){
+    if( myModalBuy[currentindex].quantity >1){
+      myModalBuy[currentindex].quantity--;
+      myModalBuy[currentindex].priceNew  -= price ;
+    }else{
+      myModalBuy[currentindex].quantity=1;
+      myModalBuy[currentindex].priceNew  = price;
+  }
+  setMyModalBuy([...myModalBuy])
+  }
+}
 
-  // đặt hàng
-  const handlePay = (data) => {
-    // console.log(data);
-    setMycart([]);
-    setTotalCart(0);
+   
+
+
+
+  const handlePay = () => {
+    setMyModalBuy([]);
+    setTotalModal(0);
 
     toast.success("Đã đặt hàng thành công!", {
       position: "top-right",
@@ -100,22 +111,35 @@ function Cart(props) {
       }, 3000);
     });
   };
-
-  return (
-    <Container maxWidth="xl">
+    return (
+        // <!-- Modal -->
+        // tabIndex={-1}
+<div className="modal fade" id="exampleModal" role="dialog" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog" role="document">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Có {countItem} sản phẩm thanh toán</h5>
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div className="modal-body">
+        {/* body */}
+        <Container maxWidth="xl">
       <Container>
         <Box className="cart-header-items ">
-          {myCart.length === 0 ? (
+          {/* {myCart.length === 0 ? (
             <Typography variant="h4">Sản phẩm trong giỏ không có:</Typography>
           ) : (
             <Typography variant="h4">
               Có {countCart} sản phẩm trong giỏ hàng:
             </Typography>
-          )}
+          )} */}
 
-          {myCart.length >= 1 &&
-            myCart.slice(0).map((item, index) => {
-              totalPrice += item.price * item.quantity;
+          {/* <Typography variant="h4">Sản phẩm trong giỏ hàng:</Typography> */}
+          {myModalBuy.length >= 1 &&
+            myModalBuy.slice(0).map((item, index) => {
+              totalPrice += item.price*item.quantity;
               return (
                 <Box key={index} className="cart-items">
                   <div className="row">
@@ -123,12 +147,12 @@ function Cart(props) {
                       <img className="imgCart" src={item.img} />
                     </div>
                     <div className="col-md-3">
-                      <h4>{item.name}</h4>
+                      <h6>{item.name}</h6>
                       <p className="text-danger font-weight-bold">
                         {item.priceNew.toLocaleString()} VNĐ
                       </p>
                       {/* <div className="d-flex list-color-item">
-                        <Box key={index} sx={{ minWidth: 80 }}>
+                        <Box  sx={{ minWidth: 80 }}>
                           <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">
                               Color
@@ -142,7 +166,7 @@ function Cart(props) {
                             >
                               {item.color.map((item2, index) => {
                                 return (
-                                  <MenuItem value={item2}>{item2}</MenuItem>
+                                  <MenuItem key={index} value={item2}>{item2}</MenuItem>
                                 );
                               })}
                             </Select>
@@ -150,30 +174,27 @@ function Cart(props) {
                         </Box>
                       </div> */}
                     </div>
-                    <div className="col-md-3 d-flex">
+                    <div className="col-md-3">
                       <Button
                         className="btnCount"
                         variant="contained"
                         color="success"
                         size="small"
-                        onClick={() =>
-                          handleEditQuatity(item.id, item.price, "add")
-                        }
+                        onClick={() => handleEditQuatity(item.id,item.price,"add")}
                       >
                         <AddIcon />
                       </Button>
                       <p className="pCount">{item.quantity}</p>
-                      <Button
+                        <Button
                         className="btnCount"
                         variant="contained"
                         color="success"
                         size="small"
-                        onClick={() =>
-                          handleEditQuatity(item.id, item.price, "sub")
-                        }
+                        onClick={() => handleEditQuatity(item.id,item.price,"sub")}
                       >
                         <HorizontalRuleIcon />
                       </Button>
+                     
                     </div>
                     <div className="col-md-3">
                       <Button
@@ -181,6 +202,7 @@ function Cart(props) {
                         variant="contained"
                         color="error"
                         size="small"
+                        data-dismiss="modal"
                         onClick={() => handleDeleteItem(item.id)}
                       >
                         <DeleteForeverIcon />
@@ -206,12 +228,11 @@ function Cart(props) {
               );
             })}
         </Box>
-        {/* onSubmit={handleSubmit(handlePay)} */}
         <form className="mx-1 mx-md-4" >
         <div className="row">
           <div className="col-md-6">
-          <h4> Thông tin đặt hàng</h4>
-          <div className="d-flex flex-row align-items-center mb-4">
+        <h4> Thông tin đặt hàng</h4>
+        <div className="d-flex flex-row align-items-center mb-4">
             <div className="form-outline flex-fill mb-0">
               <TextField
                 type="text"
@@ -267,6 +288,8 @@ function Cart(props) {
               )}
             </div>
           </div>
+          </div>
+          <div className="col-md-6">
           <FormLabel id="demo-radio-buttons-group-label">Gender:</FormLabel>
           <div className="d-flex flex-row align-items-center mb-4">
             <div className="form-outline flex-fill mb-0">
@@ -316,36 +339,41 @@ function Cart(props) {
             </div>
           </div>
           </div>
-          <div className="col-md-6">
-          <Box className="totalItem text-center">
-            <Typography variant="h6">
-              Tổng giá tiền thanh toán:
-              <p className="text-danger ">{totalPrice.toLocaleString()} VNĐ</p>
-            </Typography>
-            {myCart.length === 0 ? (
-              <Button variant="contained" color="success" disabled>
-                Hoàn tất thanh toán
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => handlePay()}
-              >
-                Hoàn tất thanh toán
-              </Button>
-            )}
-            <ToastContainer />
-          </Box>
-          </div>
-        </div>
-       
-
          
+         
+        <Box className="totalItem text-center">
+          <Typography variant="h6">
+            Tổng giá tiền thanh toán:
+            <p className="text-danger ">{totalPrice.toLocaleString()} VNĐ</p>
+          </Typography>
+          {/* {myCart.length === 0 ? (
+            <Button variant="contained" color="success" disabled>
+              Hoàn tất thanh toán
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => handlePay()}
+            >
+              Hoàn tất thanh toán
+            </Button>
+          )} */}
+          <ToastContainer />
+        </Box>
+        </div>
         </form>
       </Container>
     </Container>
-  );
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="submit" className="btn btn-primary" data-dismiss="modal" onClick={() => handlePay()}>Hoàn tất đặt hàng</button>
+      </div>
+    </div>
+  </div>
+</div>
+    );
 }
 
-export default Cart;
+export default ModalBuy;

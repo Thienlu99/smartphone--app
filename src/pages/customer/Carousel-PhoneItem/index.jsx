@@ -1,30 +1,69 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../../../components/customize/fetch";
 // import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import ThemeContext from "../../../components/customer/Context/ThemeContext";
 import "./CarouselPhone.scss";
+import ModalBuy from "./ModalBuy/ModalBuy";
 
-function CarouselPhone(props) {
+function DetalPhone(props) {
   let params = useParams();
   //Fake API
-  const {data: dataProductItem,isLoading,isError,} = useFetch(`http://localhost:3006/productitem/${params.id}`);
-  
+  const {data: dataProductItem,isLoading,isError,} = useFetch(`http://localhost:3006/phoneItem/${params.id}`);
+  // const [added,setAdded]= useState(false);
+  const [buy,setBuy]= useState(false);
   //set add cart
-  const {setMycart} = useContext(ThemeContext);
+  const {setMycart,setTotalCart,countCart,setCountCart, setMyModalBuy,setTotalModal} = useContext(ThemeContext);
   const handleClickCart = () => {
+    // setAdded(true);
     // add iphone13,12
     const newItems = {
+      id: dataProductItem.id,
       img: dataProductItem.img,
       name: dataProductItem.name,
       priceNew: dataProductItem.priceNew,
-      priceOld: dataProductItem.priceOld
+      price: dataProductItem.priceNew,
+      priceOld: dataProductItem.priceOld,
+      color: dataProductItem.color,
+      quantity: 1,
+    };
+
+    //tost thêm thành công
+    toast.success("Đã thêm vào giỏ hàng!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    // [1,2] arr.push(2);
+    
+    setMycart((item) => [...item, newItems]);
+    setTotalCart((total) =>(total += Number(dataProductItem.priceNew)));
+    setCountCart(() =>( Number(countCart+1)));
+  };
+  //modal mua
+  const handClickBuy = () =>{
+   setBuy(true);
+    // add iphone13,12
+    const newItems = {
+      id: dataProductItem.id,
+      img: dataProductItem.img,
+      name: dataProductItem.name,
+      priceNew: dataProductItem.priceNew,
+      price: dataProductItem.priceNew,
+      priceOld: dataProductItem.priceOld,
+      color: dataProductItem.color,
+      quantity: 1,
 
     };
-    // [1,2] arr.push(2);
-    setMycart((item) => [...item, newItems]);
-   console.log(newItems);
-  };
+    setMyModalBuy(() => [newItems]);
+    setTotalModal(() =>( Number(dataProductItem.priceNew)));
+    // setCountCart(() =>( Number(countCart+1)));
+  }
   return (
     <div className="container-fluid mt-5">
       {isError === false && isLoading === false && (
@@ -111,18 +150,24 @@ function CarouselPhone(props) {
               <span>1200 ratings &amp; 564 reviews</span>
             </div>
             <div className="d-flex list-color-item">
-              <div className="color-item">
-              <a className=""><p>Xanh</p></a>
+            {dataProductItem.color.map((item,index) =>{
+              return(
+              <div key={index} className="color-item">
+              {/* <div className="d-flex align-items-center mt-2"> */}
+              <label className="radio">
+                {" "}
+                <input
+                  type="radio"
+                  name="color"
+                  value={item}
+                  
+                />{" "}
+                <span>{item}</span>{" "}
+              </label>{" "}
+          
               </div>
-              <div className="color-item">
-              <a className=""><p>Vàng</p></a>
-              </div>
-              <div className="color-item">
-              <a className=""><p>Trắng</p></a>
-              </div>
-              <div className="color-item">
-              <a className=""><p>Đen</p></a>
-              </div>
+              )
+            })}
                
               
             </div>
@@ -180,20 +225,20 @@ function CarouselPhone(props) {
                 <input
                   type="radio"
                   name="ram"
-                  value="128GB"
+                  value="16GB"
                   defaultChecked
                 />{" "}
-                <span>128GB</span>{" "}
+                <span>16GB</span>{" "}
               </label>{" "}
               <label className="radio">
                 {" "}
-                <input type="radio" name="ram" value="256GB" />{" "}
-                <span>256GB</span>{" "}
+                <input type="radio" name="ram" value="32GB" />{" "}
+                <span>32GB</span>{" "}
               </label>{" "}
               <label className="radio">
                 {" "}
-                <input type="radio" name="ram" value="256GB" />{" "}
-                <span>512GB</span>{" "}
+                <input type="radio" name="ram" value="64GB" />{" "}
+                <span>64GB</span>{" "}
               </label>{" "}
             </div>
             <div>
@@ -201,10 +246,25 @@ function CarouselPhone(props) {
               <span className="ml-2">{dataProductItem.producer}</span>
             </div>
             <div className="mt-3">
-              <button className="btn btn-dark mr-2" type="button">
+            {!buy ? (
+               ""
+              ) : (
+          <ModalBuy />
+              )}
+                {/* modal display */}
+              <button className="btn btn-dark mr-2" type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => handClickBuy()}>
                 Mua ngay
               </button>
-              <button
+              {/* {added ? (
+                <button
+                className="btn btn-danger"
+                disabled
+              >
+                Đã Thêm vào giỏ
+              </button>
+           
+              ) : ( */}
+                <button
                 className="btn btn-success"
                 onClick={ 
                   handleClickCart
@@ -212,6 +272,9 @@ function CarouselPhone(props) {
               >
                 Thêm vào giỏ
               </button>
+              {/* )} */}
+             
+              <ToastContainer />
             </div>
           </div>
         </div>
@@ -234,4 +297,4 @@ function CarouselPhone(props) {
   );
 }
 
-export default CarouselPhone;
+export default DetalPhone;

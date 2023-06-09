@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.1656ae3c.css",
-    "main.js": "/static/js/main.7f14293d.js",
-    "static/js/787.281e0316.chunk.js": "/static/js/787.281e0316.chunk.js",
-    "index.html": "/index.html",
-    "main.1656ae3c.css.map": "/static/css/main.1656ae3c.css.map",
-    "main.7f14293d.js.map": "/static/js/main.7f14293d.js.map",
-    "787.281e0316.chunk.js.map": "/static/js/787.281e0316.chunk.js.map"
+    "main.css": "/smartphone--app/static/css/main.45a258fc.css",
+    "main.js": "/smartphone--app/static/js/main.8adc4744.js",
+    "static/js/787.281e0316.chunk.js": "/smartphone--app/static/js/787.281e0316.chunk.js",
+    "index.html": "/smartphone--app/index.html",
+    "main.45a258fc.css.map": "/smartphone--app/static/css/main.45a258fc.css.map",
+    "main.8adc4744.js.map": "/smartphone--app/static/js/main.8adc4744.js.map",
+    "787.281e0316.chunk.js.map": "/smartphone--app/static/js/787.281e0316.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1656ae3c.css",
-    "static/js/main.7f14293d.js"
+    "static/css/main.45a258fc.css",
+    "static/js/main.8adc4744.js"
   ]
 }
